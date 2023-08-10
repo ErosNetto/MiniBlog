@@ -1,5 +1,5 @@
 import styles from './Register.module.css';
-
+// eslint-disable-next-line
 import { useState, useEffect } from 'react';
 
 const Register = () => {

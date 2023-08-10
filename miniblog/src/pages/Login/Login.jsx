@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import styles from './Login.module.css';
 
 const Login = () => {
