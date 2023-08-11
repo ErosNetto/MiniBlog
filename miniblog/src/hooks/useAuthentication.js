@@ -26,6 +26,7 @@ export const useAuthentication = () => {
     }
   }
 
+  // Register
   const createUser = async (data) => {
     checkIfIsCancelled();
     setLoading(true);
@@ -45,8 +46,8 @@ export const useAuthentication = () => {
       setLoading(false);
       return user;
     } catch (error) {
-      console.log(error.message);
-      console.log(typeof error.message);
+      // console.log(error.message);
+      // console.log(typeof error.message);
 
       let systemErrorMessage;
 
@@ -54,6 +55,37 @@ export const useAuthentication = () => {
         systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres.';
       } else if (error.message.includes('email-already')) {
         systemErrorMessage = 'E-mail já cadastrado.';
+      } else {
+        systemErrorMessage = 'Ocorreum erro, por favor tente mais tarde.';
+      }
+
+      setLoading(false);
+      setError(systemErrorMessage);
+    }
+  };
+
+  // Logout
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
+  };
+
+  // Login
+  const login = async(data) => {
+    checkIfIsCancelled();
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      let systemErrorMessage;
+
+      if (error.message.includes('user-not-found')) {
+        systemErrorMessage = 'Usuário não encontrado.';
+      } else if (error.message.includes('wrong-password')) {
+        systemErrorMessage = 'Senha incorreta.';
       } else {
         systemErrorMessage = 'Ocorreum erro, por favor tente mais tarde.';
       }
@@ -71,6 +103,8 @@ export const useAuthentication = () => {
     auth,
     createUser,
     error,
-    loading
+    loading,
+    logout,
+    login
   };
 };

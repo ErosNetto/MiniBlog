@@ -6,6 +6,7 @@ import styles from './Navbar.module.css';
 
 const NavBar = () => {
   const { user } = useAuthValue();
+  const { logout } = useAuthentication();
 
   return (
     <nav className={styles.navbar}>
@@ -16,21 +17,34 @@ const NavBar = () => {
         <li>
           <NavLink to="/" className={({isActive}) => (isActive ? styles.active : '')}>Home</NavLink>
         </li>
-        <li>
         {!user && (
           <>
-            <NavLink to="/login" className={({isActive}) => (isActive ? styles.active : '')}>Entrar</NavLink>
-            <NavLink to="/register" className={({isActive}) => (isActive ? styles.active : '')}>Cadastrar</NavLink>
+            <li>
+              <NavLink to="/login" className={({isActive}) => (isActive ? styles.active : '')}>Entrar</NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className={({isActive}) => (isActive ? styles.active : '')}>Cadastrar</NavLink>
+            </li>
           </>
         )}
         {user && (
           <>
-            <NavLink to="/posts/create" className={({isActive}) => (isActive ? styles.active : '')}>Novo post</NavLink>
-            <NavLink to="/dashboard" className={({isActive}) => (isActive ? styles.active : '')}>Dashboard</NavLink>
+            <li>
+              <NavLink to="/posts/create" className={({isActive}) => (isActive ? styles.active : '')}>Novo post</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard" className={({isActive}) => (isActive ? styles.active : '')}>Dashboard</NavLink>
+            </li>
           </>
         )}
-        <NavLink to="/about" className={({isActive}) => (isActive ? styles.active : '')}>Sobre</NavLink>
+        <li>
+          <NavLink to="/about" className={({isActive}) => (isActive ? styles.active : '')}>Sobre</NavLink>
         </li>
+        {user && (
+          <li>
+            <button onClick={logout}>Sair</button>
+          </li>
+        )}
       </ul>
     </nav>
   );
