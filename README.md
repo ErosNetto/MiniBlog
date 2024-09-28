@@ -1,4 +1,4 @@
-# Projeto MiniBlog
+# MiniBlog
 
 Versão: 1.0.0
 
