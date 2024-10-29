@@ -8,8 +8,8 @@ import { useState, useEffect } from "react";
 import { useAuthentication } from "./hooks/useAuthentication";
 
 // Components
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 
 // Context
 import { AuthProvider } from "./contexts/AuthContext";
